@@ -2,15 +2,13 @@ import * as vscode from 'vscode'
 
 export function activate(context: vscode.ExtensionContext) {
   console.log(
-    'Congratulations, your extension "commitizen-code-extension" is now active!'
+    'Congratulations, your extension "commitizen-code" is now active!'
   )
 
   let disposable = vscode.commands.registerCommand(
-    'commitizen-code-extension.commitizen',
+    'commitizen-code.commitizen',
     () => {
-      vscode.window.showInformationMessage(
-        'Hello World from commitizen-code-extension!'
-      )
+      vscode.window.showInformationMessage('Commitizen Code!')
     }
   )
 
