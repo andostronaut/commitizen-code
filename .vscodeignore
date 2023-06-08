@@ -3,8 +3,10 @@
 src/**
 .gitignore
 .yarnrc
+.npmrc
 vsc-extension-quickstart.md
 **/tsconfig.json
 **/.eslintrc.json
+**/.prettierrc.json
 **/*.map
 **/*.ts
