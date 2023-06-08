@@ -2,7 +2,9 @@
   "name": "commitizen-code",
   "displayName": "Commitizen Code",
   "description": "Commitizen Code is a powerful Visual Studio Code (VS Code) extension designed to enhance the commit message writing experience and enforce standardized commit message formats in Git repositories. It integrates seamlessly with the Commitizen tool, a popular convention-based commit message format helper.",
-  "icon": "assets/code-commit.png",
+  "license": "MIT",
+  "publisher": "iamando",
+  "icon": "./assets/logo.png",
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.78.0"
@@ -39,7 +41,7 @@
     "pretest": "pnpm run compile && pnpm run lint",
     "lint": "prettier --check . && eslint src --ext ts",
     "lint:fix": "prettier --write . && eslint src --ext ts --fix",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./dist/test/runTest.js"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
