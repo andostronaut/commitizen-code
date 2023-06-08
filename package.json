@@ -2,6 +2,7 @@
   "name": "commitizen-code-extension",
   "displayName": "Commitizen Code Extension",
   "description": "Commitizen Code Extension is a powerful Visual Studio Code (VS Code) extension designed to enhance the commit message writing experience and enforce standardized commit message formats in Git repositories. It integrates seamlessly with the Commitizen tool, a popular convention-based commit message format helper.",
+  "icon": "assets/code-commit.png",
   "version": "1.0.0",
   "engines": {
     "vscode": "^1.78.0"
