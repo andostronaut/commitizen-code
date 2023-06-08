@@ -1,4 +1,4 @@
-# Commitizen Code Extension
+# Commitizen Code
 
 ![build](https://github.com/iamando/commitizen-code-extension/workflows/build/badge.svg)
 ![license](https://img.shields.io/github/license/iamando/commitizen-code-extension?color=success)
