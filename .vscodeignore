@@ -4,6 +4,7 @@ src/**
 .gitignore
 .yarnrc
 .npmrc
+.DS_Store
 vsc-extension-quickstart.md
 **/tsconfig.json
 **/.eslintrc.json
