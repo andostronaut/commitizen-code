@@ -1,13 +1,15 @@
 import * as vscode from 'vscode'
 
-import { checkSourceControl } from './utils/source-control'
+import sourceControl from './utils/source-control'
 
-export function activate(context: vscode.ExtensionContext) {
+function activate(context: vscode.ExtensionContext) {
   console.log(
     'Congratulations, your extension "commitizen-code" is now active!'
   )
 
-  checkSourceControl({ context })
+  sourceControl({ context })
 }
 
-export function deactivate() {}
+function deactivate() {}
+
+module.exports = { activate, deactivate }

@@ -1,4 +1,4 @@
-export function sourceControlUI() {
+function ui() {
   const template = `
     <!DOCTYPE html>
     <html lang="en">
@@ -39,3 +39,5 @@ export function sourceControlUI() {
 
   return template
 }
+
+export default ui
