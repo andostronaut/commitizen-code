@@ -1,20 +1,22 @@
 import * as vscode from 'vscode'
 
-export function checkChanges({
+import { sourceControlUI } from './ui'
+
+export function checkSourceControl({
   context,
 }: {
   context: vscode.ExtensionContext
 }) {
   const provider = {
-    resolveWebviewView: function (thisWebviewView: any) {
+    resolveWebviewView: function (thisWebviewView: vscode.WebviewView) {
       thisWebviewView.webview.options = { enableScripts: true }
-      thisWebviewView.webview.html = '<html>Changes</html>'
+      thisWebviewView.webview.html = sourceControlUI
     },
   }
 
   context.subscriptions.push(
     vscode.window.registerWebviewViewProvider(
-      'commitizen-code.changes',
+      'commitizen-code.source-control',
       provider
     )
   )

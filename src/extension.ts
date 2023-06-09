@@ -1,7 +1,6 @@
 import * as vscode from 'vscode'
 
 import { checkSourceControl } from './utils/source-control'
-import { checkChanges } from './utils/changes'
 
 export function activate(context: vscode.ExtensionContext) {
   console.log(
@@ -9,8 +8,6 @@ export function activate(context: vscode.ExtensionContext) {
   )
 
   checkSourceControl({ context })
-
-  checkChanges({ context })
 }
 
 export function deactivate() {}
