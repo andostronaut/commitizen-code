@@ -1,0 +1,16 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+}
+
+input[type='checkbox'] {
+  margin-right: 5px;
+}
+
+input[type='text'] {
+  width: 200px;
+  height: 25px;
+  padding: 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
