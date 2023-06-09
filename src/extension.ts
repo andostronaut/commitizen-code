@@ -5,14 +5,11 @@ export function activate(context: vscode.ExtensionContext) {
     'Congratulations, your extension "commitizen-code" is now active!'
   )
 
-  let disposable = vscode.commands.registerCommand(
-    'commitizen-code.commitizen',
-    () => {
+  context.subscriptions.push(
+    vscode.commands.registerCommand('commitizen-code.commit', () => {
       vscode.window.showInformationMessage('Commitizen Code!')
-    }
+    })
   )
-
-  context.subscriptions.push(disposable)
 }
 
 export function deactivate() {}

@@ -17,8 +17,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "commitizen-code.commitizen",
-        "title": "Commitizen"
+        "command": "commitizen-code.commit",
+        "title": "Commitizen Code: Commit"
       }
     ]
   },
