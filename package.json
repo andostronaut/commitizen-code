@@ -53,9 +53,8 @@
     "views": {
       "commitizen-code": [
         {
-          "id": "commitizen-code.activitybar",
-          "name": "Commitizen Code",
-          "type": "webview"
+          "id": "commitizen-code.main",
+          "name": "Commitizen Code"
         }
       ]
     }
