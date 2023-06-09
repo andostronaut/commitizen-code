@@ -10,7 +10,7 @@ export function checkSourceControl({
   const provider = {
     resolveWebviewView: function (thisWebviewView: vscode.WebviewView) {
       thisWebviewView.webview.options = { enableScripts: true }
-      thisWebviewView.webview.html = sourceControlUI
+      thisWebviewView.webview.html = sourceControlUI()
     },
   }
 
