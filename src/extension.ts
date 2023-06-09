@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 
-import sourceControl from './utils/source-control'
+import sourceControl from './providers/source-control'
 
 function activate(context: vscode.ExtensionContext) {
   console.log(

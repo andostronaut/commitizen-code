@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 
-import getNonce from './nonce'
+import getNonce from '../utils/nonce'
 
 class SourceControlProvider implements vscode.WebviewViewProvider {
   public static readonly type = 'commitizen-code.source-control'
@@ -45,7 +45,6 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
         <!--
           Use a content security policy to only allow loading styles from our extension directory,
           and only allow scripts that have a specific nonce.
-          (See the 'webview-sample' extension sample for img-src content security policy examples)
         -->
         <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
 
