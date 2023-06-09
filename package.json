@@ -32,15 +32,9 @@
     "commit",
     "formatters"
   ],
-  "activationEvents": [],
   "main": "./dist/extension.js",
+  "activationEvents": [],
   "contributes": {
-    "commands": [
-      {
-        "command": "commitizen-code.commit",
-        "title": "Commitizen Code: Commit"
-      }
-    ],
     "viewsContainers": {
       "activitybar": [
         {
@@ -53,8 +47,14 @@
     "views": {
       "commitizen-code": [
         {
-          "id": "commitizen-code.main",
-          "name": "Commitizen Code"
+          "id": "commitizen-code.source-control",
+          "name": "Commitizen Code: Source Control",
+          "type": "webview"
+        },
+        {
+          "id": "commitizen-code.changes",
+          "name": "Commitizen Code: Changes",
+          "type": "webview"
         }
       ]
     }
