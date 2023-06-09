@@ -48,12 +48,7 @@
       "commitizen-code": [
         {
           "id": "commitizen-code.source-control",
-          "name": "Commitizen Code: Source Control",
-          "type": "webview"
-        },
-        {
-          "id": "commitizen-code.changes",
-          "name": "Commitizen Code: Changes",
+          "name": "Source Control",
           "type": "webview"
         }
       ]
