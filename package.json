@@ -3,25 +3,18 @@
   "displayName": "Commitizen Code",
   "description": "Commitizen Code is a powerful Visual Studio Code (VS Code) extension designed to enhance the commit message writing experience and enforce standardized commit message formats in Git repositories. It integrates seamlessly with the Commitizen tool, a popular convention-based commit message format helper.",
   "license": "MIT",
+  "private": true,
   "publisher": "iamando",
-  "icon": "./assets/logo.png",
+  "icon": "assets/icons/commitizen.png",
   "version": "1.0.0",
   "engines": {
-    "vscode": "^1.78.0"
+    "vscode": "^1.75.1"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Formatters",
+    "SCM Providers"
   ],
-  "activationEvents": [],
-  "main": "./dist/extension.js",
-  "contributes": {
-    "commands": [
-      {
-        "command": "commitizen-code.commit",
-        "title": "Commitizen Code: Commit"
-      }
-    ]
-  },
   "author": {
     "name": "iamando",
     "email": "iamando@tuta.io"
@@ -34,6 +27,39 @@
     "url": "https://github.com/iamando/commitizen-code/issues"
   },
   "homepage": "https://github.com/iamando/commitizen-code#readme",
+  "keywords": [
+    "git",
+    "commit",
+    "formatters"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "commitizen-code.commit",
+        "title": "Commitizen Code: Commit"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "commitizen-code",
+          "title": "Commitizen Code",
+          "icon": "assets/icons/commitizen.svg"
+        }
+      ]
+    },
+    "views": {
+      "commitizen-code": [
+        {
+          "id": "commitizen-code.activitybar",
+          "name": "Commitizen Code",
+          "type": "webview"
+        }
+      ]
+    }
+  },
   "scripts": {
     "vscode:prepublish": "pnpm run compile",
     "compile": "tsc -p ./",
