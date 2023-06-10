@@ -7,7 +7,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
   private _view?: vscode.WebviewView
 
-  constructor(private readonly _extensionURI: vscode.Uri) {}
+  constructor(private readonly _extensionUri: vscode.Uri) {}
 
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
@@ -18,7 +18,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.options = {
       enableScripts: true,
-      localResourceRoots: [this._extensionURI],
+      localResourceRoots: [this._extensionUri],
     }
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview)
@@ -26,13 +26,13 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
   private _getHtmlForWebview(webview: vscode.Webview) {
     const styleResetUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionURI, 'media', 'reset.css')
+      vscode.Uri.joinPath(this._extensionUri, 'media', 'reset.css')
     )
     const styleVSCodeUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionURI, 'media', 'vscode.css')
+      vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css')
     )
     const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionURI, 'media', 'main.css')
+      vscode.Uri.joinPath(this._extensionUri, 'media', 'main.css')
     )
 
     const nonce = getNonce()
@@ -57,7 +57,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
         <title>Source Control</title>
       </head>
       <body>
-        <button class="add-color-button">Source Control</button>
+        <button class="commit-button">Commit</button>
       </body>
       </html>`
   }
