@@ -27,8 +27,16 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.onDidReceiveMessage(message => {
       switch (message.type) {
+        case 'empty-commit-message': {
+          vscode.window.showErrorMessage(
+            'Commitizen Code: Commit message is empty'
+          )
+          break
+        }
         case 'commit': {
-          vscode.window.showInformationMessage('Commitizen Code: Commit')
+          vscode.window.showInformationMessage(
+            `Commitizen Code: Commit message is: ${message.value} `
+          )
           break
         }
       }
@@ -68,7 +76,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
       </head>
       <body>
         <div class="textarea-grow-wrap">
-          <textarea id="commit-message" name="commit-message" placeholder="Commit message" rows="1" maxlength="124"></textarea>
+          <textarea id="commit-input" name="commit-message" placeholder="Commit message" rows="1" maxlength="124"></textarea>
         </div>
 
         <button id="commit-button">Commit</button>
