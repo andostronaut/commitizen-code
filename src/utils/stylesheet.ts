@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 
-function applyStylesheet({
+function getStylesheetURI({
   webview,
   extensionUri,
 }: {
@@ -20,4 +20,4 @@ function applyStylesheet({
   return { styleResetUri, styleVSCodeUri, styleMainUri }
 }
 
-export { applyStylesheet }
+export { getStylesheetURI }
