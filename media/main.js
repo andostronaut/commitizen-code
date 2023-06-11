@@ -5,10 +5,17 @@
 ;(function () {
   // @ts-ignore
   const vscode = acquireVsCodeApi()
+  const commitButton = document.querySelector('#commit-button')
+  const commitInput = document.querySelector('#commit-input')
 
-  document.querySelector('#commit-button')?.addEventListener('click', () => {
-    vscode.postMessage({ type: 'commit' })
+  commitButton?.addEventListener('click', () => {
+    // @ts-ignore
+    if (commitInput.value === '') {
+      vscode.postMessage({ type: 'empty-commit-message' })
+      return
+    }
+
+    // @ts-ignore
+    vscode.postMessage({ type: 'commit', value: commitInput.value })
   })
-
-  console.log('Commitizen Code: Script running...')
 })()
