@@ -2,6 +2,7 @@ import * as vscode from 'vscode'
 
 import { generateNonce } from '../utils/nonce'
 import { applyStylesheet } from '../utils/stylesheet'
+import { applyScript } from '../utils/script'
 
 class SourceControlProvider implements vscode.WebviewViewProvider {
   public static readonly type = 'commitizen-code.source-control'
@@ -27,6 +28,10 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
   private _getHtmlForWebview(webview: vscode.Webview) {
     const { styleResetUri, styleVSCodeUri, styleMainUri } = applyStylesheet({
+      webview,
+      extensionUri: this._extensionUri,
+    })
+    const { scriptUri } = applyScript({
       webview,
       extensionUri: this._extensionUri,
     })
@@ -60,6 +65,8 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
           <button id="commit-button">Commit</button>
         </form>
+
+        <script nonce="${nonce}" src="${scriptUri}"></script>
       </body>
       </html>`
   }
