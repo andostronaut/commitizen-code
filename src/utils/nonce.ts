@@ -1,4 +1,4 @@
-function getNonce() {
+function generateNonce() {
   let text = ''
   const possible =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -8,4 +8,4 @@ function getNonce() {
   return text
 }
 
-export default getNonce
+export { generateNonce }
