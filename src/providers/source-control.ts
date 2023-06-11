@@ -1,6 +1,7 @@
 import * as vscode from 'vscode'
 
 import getNonce from '../utils/nonce'
+import { applyStylesheet } from '../utils/stylesheet'
 
 class SourceControlProvider implements vscode.WebviewViewProvider {
   public static readonly type = 'commitizen-code.source-control'
@@ -25,15 +26,10 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
-    const styleResetUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, 'media', 'reset.css')
-    )
-    const styleVSCodeUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, 'media', 'vscode.css')
-    )
-    const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this._extensionUri, 'media', 'main.css')
-    )
+    const { styleResetUri, styleVSCodeUri, styleMainUri } = applyStylesheet({
+      webview,
+      extensionUri: this._extensionUri,
+    })
 
     const nonce = getNonce()
 
