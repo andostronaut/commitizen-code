@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 
-import getNonce from '../utils/nonce'
+import { generateNonce } from '../utils/nonce'
 import { applyStylesheet } from '../utils/stylesheet'
 
 class SourceControlProvider implements vscode.WebviewViewProvider {
@@ -31,7 +31,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
       extensionUri: this._extensionUri,
     })
 
-    const nonce = getNonce()
+    const nonce = generateNonce()
 
     return `<!DOCTYPE html>
       <html lang="en">
