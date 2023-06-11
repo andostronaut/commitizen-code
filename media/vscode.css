@@ -89,3 +89,21 @@ input::placeholder,
 textarea::placeholder {
   color: var(--vscode-input-placeholderForeground);
 }
+
+select {
+  margin: 0;
+  box-sizing: border-box;
+  background-color: var(--vscode-input-background);
+  width: 100%;
+  border: thin solid var(--vscode-input-border);
+  border: none;
+  display: block;
+  font: inherit;
+  padding: 0.5em 3em 0.5em 0em;
+  color: var(--vscode-input-foreground);
+}
+
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
