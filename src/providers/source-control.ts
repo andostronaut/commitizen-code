@@ -12,7 +12,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
-    context: vscode.WebviewViewResolveContext,
+    _context: vscode.WebviewViewResolveContext,
     _token: vscode.CancellationToken
   ) {
     this._view = webviewView
@@ -53,7 +53,13 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
         <title>Source Control</title>
       </head>
       <body>
-        <button class="commit-button">Commit</button>
+        <form>
+          <div class="textarea-grow-wrap">
+            <textarea id="commit-message" name="commit-message" placeholder="Commit message" rows="1" maxlength="124"></textarea>
+          </div>
+
+          <button id="commit-button">Commit</button>
+        </form>
       </body>
       </html>`
   }
