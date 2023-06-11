@@ -1,8 +1,8 @@
 import * as vscode from 'vscode'
 
 import { generateNonce } from '../utils/nonce'
-import { applyStylesheet } from '../utils/stylesheet'
-import { applyScript } from '../utils/script'
+import { getStylesheetURI } from '../utils/stylesheet'
+import { getScriptURI } from '../utils/script'
 
 class SourceControlProvider implements vscode.WebviewViewProvider {
   public static readonly type = 'commitizen-code.source-control'
@@ -27,11 +27,11 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
-    const { styleResetUri, styleVSCodeUri, styleMainUri } = applyStylesheet({
+    const { styleResetUri, styleVSCodeUri, styleMainUri } = getStylesheetURI({
       webview,
       extensionUri: this._extensionUri,
     })
-    const { scriptUri } = applyScript({
+    const { scriptUri } = getScriptURI({
       webview,
       extensionUri: this._extensionUri,
     })

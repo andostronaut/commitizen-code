@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 
-function applyScript({
+function getScriptURI({
   webview,
   extensionUri,
 }: {
@@ -14,4 +14,4 @@ function applyScript({
   return { scriptUri }
 }
 
-export { applyScript }
+export { getScriptURI }
