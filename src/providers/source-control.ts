@@ -73,7 +73,12 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
         <title>Source Control</title>
       </head>
       <body>
-        <div>
+        <span class="intro">Welcome to Commitizen Code</span>
+        <br>
+        <br>
+        <span class="link">This is the VSCode Extension for the Commitizen CLI, you can found it <a href="https://www.npmjs.com/package/commitizen-cli">here</a></span>
+
+        <div class="input-container">
           <select id="commit-type" name="commit-type">
             <option value="feature">Feature</option>
             <option value="bugfix">Bugfix</option>
@@ -89,6 +94,8 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
         </div>
 
         <button id="commit-button">Commit</button>
+
+        <span class="outro">Start your commit journey from now.</span>
 
         <script nonce="${nonce}" src="${scriptUri}"></script>
       </body>
