@@ -12,4 +12,4 @@ function activate(context: vscode.ExtensionContext) {
 
 function deactivate() {}
 
-module.exports = { activate, deactivate }
+export { activate, deactivate }
