@@ -73,7 +73,18 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
         <title>Source Control</title>
       </head>
       <body>
-        <div class="textarea-grow-wrap">
+        <div>
+          <select id="commit-type" name="commit-type">
+            <option value="feature">Feature</option>
+            <option value="bugfix">Bugfix</option>
+            <option value="hotfix">Hotfix</option>
+            <option value="chore">Chore</option>
+            <option value="epic">Epic</option>
+            <option value="design">Design</option>
+            <option value="experiment">Experiment</option>
+            <option value="documentation">Documentation</option>
+          </select>
+
           <textarea id="commit-input" name="commit-message" placeholder="Commit message" rows="1" maxlength="124"></textarea>
         </div>
 
