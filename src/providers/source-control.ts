@@ -27,10 +27,8 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.onDidReceiveMessage(message => {
       switch (message.type) {
-        case 'empty-commit-message': {
-          vscode.window.showErrorMessage(
-            'Commitizen Code: Commit message is empty'
-          )
+        case 'error': {
+          vscode.window.showErrorMessage(message.value)
           break
         }
         case 'commit': {
