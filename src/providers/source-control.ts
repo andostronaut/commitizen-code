@@ -24,6 +24,15 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
     }
 
     webviewView.webview.html = this._getHtmlForWebview(webviewView.webview)
+
+    webviewView.webview.onDidReceiveMessage(message => {
+      switch (message.type) {
+        case 'commit': {
+          vscode.window.showInformationMessage('Commitizen Code: Commit')
+          break
+        }
+      }
+    })
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
@@ -58,13 +67,11 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
         <title>Source Control</title>
       </head>
       <body>
-        <form>
-          <div class="textarea-grow-wrap">
-            <textarea id="commit-message" name="commit-message" placeholder="Commit message" rows="1" maxlength="124"></textarea>
-          </div>
+        <div class="textarea-grow-wrap">
+          <textarea id="commit-message" name="commit-message" placeholder="Commit message" rows="1" maxlength="124"></textarea>
+        </div>
 
-          <button id="commit-button">Commit</button>
-        </form>
+        <button id="commit-button">Commit</button>
 
         <script nonce="${nonce}" src="${scriptUri}"></script>
       </body>

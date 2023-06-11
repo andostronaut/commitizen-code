@@ -52,7 +52,14 @@
           "type": "webview"
         }
       ]
-    }
+    },
+    "commands": [
+      {
+        "command": "commitizen-code.source-control.notify",
+        "category": "Source Control",
+        "title": "Notify"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run build",
