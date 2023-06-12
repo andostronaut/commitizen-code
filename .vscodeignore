@@ -1,9 +1,13 @@
+.github/**
 .vscode/**
 .vscode-test/**
 src/**
+.editorconfig
 .gitignore
+.gitattributes
 .yarnrc
 .npmrc
+.nvmrc
 .DS_Store
 vsc-extension-quickstart.md
 **/tsconfig.json
@@ -11,3 +15,4 @@ vsc-extension-quickstart.md
 **/.prettierrc.json
 **/*.map
 **/*.ts
+**/webpack.config.js
