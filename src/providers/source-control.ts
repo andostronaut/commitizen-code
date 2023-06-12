@@ -8,8 +8,11 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
   public static readonly type = 'commitizen-code.source-control'
 
   private _view?: vscode.WebviewView
+  private _terminal?: vscode.Terminal
 
-  constructor(private readonly _extensionUri: vscode.Uri) {}
+  constructor(private readonly _extensionUri: vscode.Uri) {
+    this._terminal = vscode.window.createTerminal('commitizen-code: terminal')
+  }
 
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
