@@ -28,12 +28,12 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
     webviewView.webview.onDidReceiveMessage(message => {
       switch (message.type) {
         case 'error': {
-          vscode.window.showErrorMessage(message.value)
+          vscode.window.showErrorMessage(message.data.message)
           break
         }
         case 'commit': {
           vscode.window.showInformationMessage(
-            `Commitizen Code: Commit message is: ${message.value} `
+            `Commitizen Code: Commit message is: ${message.data.commit} `
           )
           break
         }
@@ -77,9 +77,11 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
         <br>
         <br>
         <span class="link">This is the VSCode Extension for the Commitizen CLI, you can found it <a href="https://www.npmjs.com/package/commitizen-cli">here</a></span>
+        <br>
+        <br>
 
         <div class="input-container">
-          <select id="commit-type" name="commit-type">
+          <select id="commit-select" name="commit-select">
             <option value="feature">Feature</option>
             <option value="bugfix">Bugfix</option>
             <option value="hotfix">Hotfix</option>
@@ -89,8 +91,9 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
             <option value="experiment">Experiment</option>
             <option value="documentation">Documentation</option>
           </select>
+        <br>
 
-          <textarea id="commit-input" name="commit-message" placeholder="Commit message" rows="1" maxlength="124"></textarea>
+          <textarea id="commit-input" name="commit-input" placeholder="Commit message" rows="1" maxlength="124"></textarea>
         </div>
 
         <button id="commit-button">Commit</button>
