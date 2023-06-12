@@ -10,10 +10,10 @@
   const commitInput = document.querySelector('#commit-input')
   const commitButton = document.querySelector('#commit-button')
 
-  const regexp =
-    /^(feature|bugfix|hotfix|chore|epic|design|experiment|documentation):(?!\s*$)\s/
+  // const regexp =
+  //   /^(feature|bugfix|hotfix|chore|epic|design|experiment|documentation):(?!\s*$)\s/
 
-  let commitType = null
+  let commitType = 'feature'
 
   commitSelect?.addEventListener('change', e => {
     // @ts-ignore
@@ -48,9 +48,9 @@
       data: {
         'commit-type': commitType,
         // @ts-ignore
-        'commit-message': commitInput.value,
+        'commit-message': commitInput.value.trim(),
         // @ts-ignore
-        commit: `${commitType}: ${commitInput.value}`,
+        commit: `${commitType}: ${commitInput.value.trim()}`,
       },
     })
   })
