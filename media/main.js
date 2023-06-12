@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 //@ts-check
 
 // This script will be run within the webview itself
@@ -5,33 +6,52 @@
 ;(function () {
   // @ts-ignore
   const vscode = acquireVsCodeApi()
-  const commitButton = document.querySelector('#commit-button')
+  const commitSelect = document.querySelector('#commit-select')
   const commitInput = document.querySelector('#commit-input')
+  const commitButton = document.querySelector('#commit-button')
 
   const regexp =
     /^(feature|bugfix|hotfix|chore|epic|design|experiment|documentation):(?!\s*$)\s/
+
+  let commitType = null
+
+  commitSelect?.addEventListener('change', e => {
+    // @ts-ignore
+    commitType = e.target.value
+  })
 
   commitButton?.addEventListener('click', () => {
     // @ts-ignore
     if (commitInput.value === '') {
       vscode.postMessage({
         type: 'error',
-        value: 'Commitizen Code: Commit message is empty',
+        data: {
+          message: 'Commitizen Code: Commit message is empty',
+        },
       })
       return
     }
 
     // @ts-ignore
-    if (!commitInput.value.match(regexp)) {
-      vscode.postMessage({
-        type: 'error',
-        value:
-          'Commitizen Code: Commit message is not conform to the convention',
-      })
-      return
-    }
+    // if (!commitInput.value.match(regexp)) {
+    //   vscode.postMessage({
+    //     type: 'error',
+    //     value:
+    //       'Commitizen Code: Commit message is not conform to the convention',
+    //   })
+    //   return
+    // }
 
     // @ts-ignore
-    vscode.postMessage({ type: 'commit', value: commitInput.value })
+    vscode.postMessage({
+      type: 'commit',
+      data: {
+        'commit-type': commitType,
+        // @ts-ignore
+        'commit-message': commitInput.value,
+        // @ts-ignore
+        commit: `${commitType}: ${commitInput.value}`,
+      },
+    })
   })
 })()
