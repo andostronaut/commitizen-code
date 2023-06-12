@@ -10,10 +10,12 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
   private _view?: vscode.WebviewView
   private _terminal?: vscode.Terminal
 
+  /**@param _extensionUri*/
   constructor(private readonly _extensionUri: vscode.Uri) {
     this._terminal = vscode.window.createTerminal('commitizen-code: terminal')
   }
 
+  /**@param webviewView @param _context @param _token*/
   public resolveWebviewView(
     webviewView: vscode.WebviewView,
     _context: vscode.WebviewViewResolveContext,
@@ -44,15 +46,13 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
     })
   }
 
+  /**@param webview @returns*/
   private _getHtmlForWebview(webview: vscode.Webview) {
-    const { styleResetUri, styleVSCodeUri, styleMainUri } = getStylesheetURI({
+    const { styleResetUri, styleVSCodeUri, styleMainUri } = getStylesheetURI(
       webview,
-      extensionUri: this._extensionUri,
-    })
-    const { scriptUri } = getScriptURI({
-      webview,
-      extensionUri: this._extensionUri,
-    })
+      this._extensionUri
+    )
+    const { scriptUri } = getScriptURI(webview, this._extensionUri)
 
     const nonce = generateNonce()
 
@@ -109,7 +109,8 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
   }
 }
 
-function sourceControl({ context }: { context: vscode.ExtensionContext }) {
+/**@param context*/
+function sourceControl(context: vscode.ExtensionContext) {
   const provider = new SourceControlProvider(context.extensionUri)
 
   context.subscriptions.push(
