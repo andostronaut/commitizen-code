@@ -24,7 +24,10 @@ const config = {
     mainFields: ['browser', 'module', 'main'],
     extensions: ['.ts', '.js'],
     alias: {},
-    fallback: {},
+    fallback: {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      child_process: false,
+    },
   },
   module: {
     rules: [
