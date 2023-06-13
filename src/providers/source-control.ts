@@ -9,10 +9,12 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
   private _view?: vscode.WebviewView
   private _terminal?: vscode.Terminal
+  private _workspace?: vscode.WorkspaceFolder[]
 
   /**@param _extensionUri*/
   constructor(private readonly _extensionUri: vscode.Uri) {
     this._terminal = vscode.window.createTerminal('commitizen-code: terminal')
+    this._workspace = vscode.workspace.workspaceFolders as any
   }
 
   /**@param webviewView @param _context @param _token*/
