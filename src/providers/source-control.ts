@@ -96,7 +96,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
             <option value="experiment">Experiment</option>
             <option value="documentation">Documentation</option>
           </select>
-        <br>
+          <br>
 
           <textarea id="commit-input" name="commit-input" placeholder="Commit message" rows="1" maxlength="124"></textarea>
         </div>
