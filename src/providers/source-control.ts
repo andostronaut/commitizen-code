@@ -49,7 +49,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
   }
 
   /**@param webview @returns*/
-  private _getHtmlForWebview(webview: vscode.Webview) {
+  private _getHtmlForWebview(webview: vscode.Webview): string {
     const { styleResetUri, styleVSCodeUri, styleMainUri } = getStylesheetURI(
       webview,
       this._extensionUri
