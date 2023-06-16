@@ -1,4 +1,4 @@
-function generateNonce() {
+function generateNonce(): string {
   let text = ''
   const possible =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
