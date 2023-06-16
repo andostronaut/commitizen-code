@@ -1,7 +1,14 @@
 import * as vscode from 'vscode'
 
 /**@param webview @param extensionUri @returns*/
-function getStylesheetURI(webview: vscode.Webview, extensionUri: vscode.Uri) {
+function getStylesheetURI(
+  webview: vscode.Webview,
+  extensionUri: vscode.Uri
+): {
+  styleResetUri: vscode.Uri
+  styleVSCodeUri: vscode.Uri
+  styleMainUri: vscode.Uri
+} {
   const styleResetUri = webview.asWebviewUri(
     vscode.Uri.joinPath(extensionUri, 'media', 'reset.css')
   )
