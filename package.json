@@ -62,7 +62,7 @@
     "lint": "prettier --check . && eslint src --ext ts",
     "lint:fix": "prettier --write . && eslint src --ext ts --fix",
     "test:compile": "tsc -p ./",
-    "test": "node ./out/test/runTest.js"
+    "test": "jiti ./src/test/runTest.ts"
   },
   "devDependencies": {
     "@types/glob": "^8.1.0",
@@ -74,6 +74,7 @@
     "@vscode/test-electron": "^2.3.2",
     "eslint": "^8.41.0",
     "glob": "^8.1.0",
+    "jiti": "^1.18.2",
     "mocha": "^10.2.0",
     "prettier": "^2.8.8",
     "ts-loader": "^9.4.3",
