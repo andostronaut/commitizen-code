@@ -3,18 +3,19 @@ import * as vscode from 'vscode'
 import { generateNonce } from '../utils/nonce'
 import { getStylesheetURI } from '../utils/stylesheet'
 import { getScriptURI } from '../utils/script'
+import { isWorkspaceHasGit } from '../utils/workspace'
 
 class SourceControlProvider implements vscode.WebviewViewProvider {
   public static readonly type = 'commitizen-code.source-control'
 
   private _view?: vscode.WebviewView
   private _terminal?: vscode.Terminal
-  private _workspace?: vscode.WorkspaceFolder[]
+  private _workspace?: vscode.WorkspaceFolder[] | any
 
   /**@param _extensionUri*/
   constructor(private readonly _extensionUri: vscode.Uri) {
     this._terminal = vscode.window.createTerminal('commitizen-code: terminal')
-    this._workspace = vscode.workspace.workspaceFolders as any
+    this._workspace = vscode.workspace.workspaceFolders
   }
 
   /**@param webviewView @param _context @param _token*/
@@ -57,6 +58,10 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
     const { scriptUri } = getScriptURI(webview, this._extensionUri)
 
     const nonce = generateNonce()
+
+    const outroText = isWorkspaceHasGit(this._workspace as any)
+      ? 'Start your commit journey from now.'
+      : 'Please open a folder how have git initialized.'
 
     return `<!DOCTYPE html>
       <html lang="en">
@@ -103,7 +108,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
         <button id="commit-button">Commit</button>
 
-        <span class="outro">Start your commit journey from now.</span>
+        <span class="outro">${outroText}</span>
 
         <script nonce="${nonce}" src="${scriptUri}"></script>
       </body>
