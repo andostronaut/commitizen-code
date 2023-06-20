@@ -6,20 +6,19 @@ function isWorkspaceFoldersNotEmpty(
   return workspaceFolders && workspaceFolders.length > 0
 }
 
-function isWorkspaceHasGit(
+async function isWorkspaceHasGit(
   workspaceFolders: vscode.WorkspaceFolder[]
-): boolean {
+): Promise<boolean> {
+  let hasGitFolder = false
+
   if (workspaceFolders) {
     for (const folder of workspaceFolders) {
-      const gitInfo =
-        vscode.workspace.getWorkspaceFolder(folder.uri)?.uri.scheme === 'git'
-      if (gitInfo) {
-        return true
-      }
-      return false
+      const data = await vscode.workspace.fs.readDirectory(folder.uri)
+      hasGitFolder = data.flat().includes('.git')
     }
   }
-  return false
+
+  return hasGitFolder
 }
 
 export { isWorkspaceFoldersNotEmpty, isWorkspaceHasGit }
