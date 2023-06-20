@@ -4,7 +4,7 @@ import { generateNonce } from '../utils/nonce'
 import { getStylesheetURI } from '../utils/stylesheet'
 import { getScriptURI } from '../utils/script'
 import { isWorkspaceHasGit } from '../utils/workspace'
-import { renderCommitFormUI, renderOpenFolderUI } from '../ui'
+import { renderIntroUI, renderCommitFormUI, renderOpenFolderUI } from '../ui'
 
 class SourceControlProvider implements vscode.WebviewViewProvider {
   public static readonly type = 'commitizen-code.source-control'
@@ -92,12 +92,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
         <title>Source Control</title>
       </head>
       <body>
-        <span class="intro">Welcome to Commitizen Code</span>
-        <br>
-        <br>
-        <span class="link">This is the VSCode Extension for Commitizen CLI, you can found it <a href="https://www.npmjs.com/package/commitizen-cli">here</a></span>
-        <br>
-        <br>
+        <section>${renderIntroUI()}</section>
 
         <section>${partialUI()}</section>
         <br>
