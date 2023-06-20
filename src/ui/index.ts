@@ -1,3 +1,16 @@
+function renderIntroUI(): string {
+  return `
+    <div>
+      <span class="intro">Welcome to Commitizen Code</span>
+      <br>
+      <br>
+      <span class="link">This is the VSCode Extension for Commitizen CLI, you can found it <a href="https://www.npmjs.com/package/commitizen-cli">here</a></span>
+      <br>
+      <br>
+    </div>
+  `
+}
+
 function renderCommitFormUI(): string {
   return `
     <form id="commit-form">
@@ -33,4 +46,4 @@ function renderOpenFolderUI(): string {
   `
 }
 
-export { renderCommitFormUI, renderOpenFolderUI }
+export { renderIntroUI, renderCommitFormUI, renderOpenFolderUI }
