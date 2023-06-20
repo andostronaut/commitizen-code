@@ -11,7 +11,3 @@ select#commit-type {
 textarea#commit-input {
   margin-bottom: 15px;
 }
-
-button#commit-button {
-  margin-bottom: 15px;
-}
