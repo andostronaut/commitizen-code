@@ -19,7 +19,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
   }
 
   /**@param webviewView @param _context @param _token*/
-  public resolveWebviewView(
+  public async resolveWebviewView(
     webviewView: vscode.WebviewView,
     _context: vscode.WebviewViewResolveContext,
     _token: vscode.CancellationToken
@@ -31,7 +31,9 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
       localResourceRoots: [this._extensionUri],
     }
 
-    webviewView.webview.html = this._getHtmlForWebview(webviewView.webview)
+    webviewView.webview.html = await this._getHtmlForWebview(
+      webviewView.webview
+    )
 
     webviewView.webview.onDidReceiveMessage(message => {
       switch (message.type) {
@@ -50,7 +52,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
   }
 
   /**@param webview @returns*/
-  private _getHtmlForWebview(webview: vscode.Webview): string {
+  private async _getHtmlForWebview(webview: vscode.Webview): Promise<string> {
     const { styleResetUri, styleVSCodeUri, styleMainUri } = getStylesheetURI(
       webview,
       this._extensionUri
@@ -59,7 +61,9 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
     const nonce = generateNonce()
 
-    const outroText = isWorkspaceHasGit(this._workspace as any)
+    // console.log(isWorkspaceHasGit(this._workspace as any))
+
+    const outroText = (await isWorkspaceHasGit(this._workspace as any))
       ? 'Start your commit journey from now.'
       : 'Please open a folder how have git initialized.'
 
