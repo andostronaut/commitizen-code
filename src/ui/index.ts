@@ -1,4 +1,4 @@
-function renderCommitFormUI() {
+function renderCommitFormUI(): string {
   return `
     <form id="commit-form">
       <div class="input-container">
@@ -22,7 +22,7 @@ function renderCommitFormUI() {
   `
 }
 
-function renderOpenFolderUI() {
+function renderOpenFolderUI(): string {
   return `
     <div id="open-folder">
       <span>Open Folder</span>
