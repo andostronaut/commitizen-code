@@ -4,6 +4,7 @@ import { generateNonce } from '../utils/nonce'
 import { getStylesheetURI } from '../utils/stylesheet'
 import { getScriptURI } from '../utils/script'
 import { isWorkspaceHasGit } from '../utils/workspace'
+import { renderCommitFormUI, renderOpenFolderUI } from '../ui'
 
 class SourceControlProvider implements vscode.WebviewViewProvider {
   public static readonly type = 'commitizen-code.source-control'
@@ -61,11 +62,13 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
     const nonce = generateNonce()
 
-    // console.log(isWorkspaceHasGit(this._workspace as any))
-
     const outroText = (await isWorkspaceHasGit(this._workspace as any))
       ? 'Start your commit journey from now.'
       : 'Please open a folder how have git initialized.'
+
+    const partialUI = (await isWorkspaceHasGit(this._workspace as any))
+      ? renderCommitFormUI
+      : renderOpenFolderUI
 
     return `<!DOCTYPE html>
       <html lang="en">
@@ -76,7 +79,9 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
           Use a content security policy to only allow loading styles from our extension directory,
           and only allow scripts that have a specific nonce.
         -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${
+          webview.cspSource
+        }; script-src 'nonce-${nonce}';">
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -94,23 +99,8 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
         <br>
         <br>
 
-        <div class="input-container">
-          <select id="commit-select" name="commit-select">
-            <option value="feature">Feature</option>
-            <option value="bugfix">Bugfix</option>
-            <option value="hotfix">Hotfix</option>
-            <option value="chore">Chore</option>
-            <option value="epic">Epic</option>
-            <option value="design">Design</option>
-            <option value="experiment">Experiment</option>
-            <option value="documentation">Documentation</option>
-          </select>
-          <br>
-
-          <textarea id="commit-input" name="commit-input" placeholder="Commit message" rows="1" maxlength="124"></textarea>
-        </div>
-
-        <button id="commit-button">Commit</button>
+        <section>${partialUI()}</section>
+        <br>
 
         <span class="outro">${outroText}</span>
 
