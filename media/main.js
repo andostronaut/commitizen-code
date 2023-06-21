@@ -20,7 +20,9 @@
     commitType = e.target.value
   })
 
-  commitButton?.addEventListener('click', () => {
+  commitButton?.addEventListener('click', e => {
+    e.preventDefault()
+
     // @ts-ignore
     if (commitInput.value === '') {
       vscode.postMessage({
