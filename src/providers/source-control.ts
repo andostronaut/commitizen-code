@@ -5,7 +5,6 @@ import { getStylesheetURI } from '../utils/stylesheet'
 import { getScriptURI } from '../utils/script'
 import { isWorkspaceHasGit } from '../utils/workspace'
 import { renderIntroUI, renderCommitFormUI, renderOpenFolderUI } from '../ui'
-import { executeCommand } from '../utils/process'
 
 class SourceControlProvider implements vscode.WebviewViewProvider {
   public static readonly type = 'commitizen-code.source-control'
