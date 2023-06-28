@@ -50,6 +50,11 @@
           "id": "commitizen-code.source-control",
           "name": "Source Control",
           "type": "webview"
+        },
+        {
+          "id": "commitizen-code.changes",
+          "name": "Changes",
+          "type": "tree"
         }
       ]
     }

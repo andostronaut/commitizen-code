@@ -5,7 +5,7 @@ import { getStylesheetURI } from '../utils/stylesheet'
 import { getScriptURI } from '../utils/script'
 import { isWorkspaceHasGit } from '../utils/workspace'
 import { renderIntroUI, renderCommitFormUI, renderOpenFolderUI } from '../ui'
-import { spawn } from '../utils/process'
+import { executeCommand } from '../utils/process'
 
 class SourceControlProvider implements vscode.WebviewViewProvider {
   public static readonly type = 'commitizen-code.source-control'
@@ -39,14 +39,13 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
       switch (message.type) {
         case 'error': {
           vscode.window.showErrorMessage(message.data.message)
+
           break
         }
         case 'commit': {
           vscode.window.showInformationMessage(
             `Commitizen Code: Commit message is: ${message.data.commit} `
           )
-
-          spawn({ exec: 'git', cmd: 'status' })
 
           break
         }
