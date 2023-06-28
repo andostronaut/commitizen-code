@@ -18,6 +18,7 @@ function exec(cmd: string): Promise<string> {
   })
 }
 
+/**@param cmd*/
 function spawn(cmd: CmdProps): void {
   const p = spawnProcess(cmd.exec, [cmd.cmd], { cwd: '.' })
 
