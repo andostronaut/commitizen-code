@@ -35,4 +35,31 @@ function spawn(cmd: CmdProps): void {
   })
 }
 
+/**@param command @param args*/
+export function executeCommand(command: string, args: string): String {
+  const cp = require('child_process')
+
+  let argument: string = args
+  let cmd: string = command + ' ' + argument
+
+  const proc = cp.spawnSync(cmd, {
+    shell: true,
+    encoding: 'utf8',
+  })
+
+  let procData = proc.stdout.toString()
+
+  if (proc !== null) {
+    if (proc.stdout !== null && proc.stdout.toString() !== '') {
+      procData = proc.stdout.toString()
+    }
+    if (proc.stderr !== null && proc.stderr.toString() !== '') {
+      const procErr = proc.stderr.toString
+      procData = procErr
+    }
+  }
+
+  return procData
+}
+
 export { exec, spawn }
