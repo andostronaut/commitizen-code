@@ -5,6 +5,7 @@ type CmdProps = {
   cmd: string
 }
 
+/**@param cmd @returns {Promise}*/
 function exec(cmd: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     execProcess(cmd, (err, out) => {
