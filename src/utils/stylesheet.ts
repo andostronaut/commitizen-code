@@ -1,6 +1,6 @@
 import * as vscode from 'vscode'
 
-/**@param webview @param extensionUri @returns*/
+/**@param webview @param extensionUri @returns {Object}*/
 function getStylesheetURI(
   webview: vscode.Webview,
   extensionUri: vscode.Uri
