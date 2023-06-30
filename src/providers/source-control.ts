@@ -11,10 +11,12 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
   private _view?: vscode.WebviewView
   private _workspace?: vscode.WorkspaceFolder[] | any
+  private _extensionUri?: vscode.Uri | any
 
   /**@param _extensionUri*/
-  constructor(private readonly _extensionUri: vscode.Uri) {
+  constructor(context: vscode.ExtensionContext) {
     this._workspace = vscode.workspace.workspaceFolders
+    this._extensionUri = context.extensionUri
   }
 
   /**@param webviewView @param _context @param _token*/
@@ -105,16 +107,4 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
   }
 }
 
-/**@param context*/
-function sourceControl(context: vscode.ExtensionContext) {
-  const provider = new SourceControlProvider(context.extensionUri)
-
-  context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider(
-      SourceControlProvider.type,
-      provider
-    )
-  )
-}
-
-export default sourceControl
+export default SourceControlProvider
