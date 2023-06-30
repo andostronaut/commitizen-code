@@ -1,11 +1,18 @@
 import * as vscode from 'vscode'
 
-import sourceControl from './providers/source-control'
+import SourceControlProvider from './providers/source-control'
 import ChangesProvider from './providers/changes'
 
 /**@param context*/
 function activate(context: vscode.ExtensionContext) {
-  sourceControl(context)
+  const provider = new SourceControlProvider(context)
+
+  context.subscriptions.push(
+    vscode.window.registerWebviewViewProvider(
+      SourceControlProvider.type,
+      provider
+    )
+  )
 
   new ChangesProvider(context)
 }

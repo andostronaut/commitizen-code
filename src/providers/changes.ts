@@ -1,41 +1,15 @@
 import * as vscode from 'vscode'
 
 class ChangesProvider {
+  public readonly type = 'commitizen-code.changes'
+
   constructor(context: vscode.ExtensionContext) {
-    const view = vscode.window.createTreeView('commitizen-code.changes', {
+    const view = vscode.window.createTreeView(this.type, {
       treeDataProvider: aNodeWithIdTreeDataProvider(),
       showCollapseAll: true,
     })
 
     context.subscriptions.push(view)
-
-    vscode.commands.registerCommand(
-      'commitizen-code.changes.reveal',
-      async () => {
-        const key = await vscode.window.showInputBox({
-          placeHolder: 'Type the label of the item to reveal',
-        })
-        if (key) {
-          await view.reveal(
-            { key },
-            { focus: true, select: false, expand: true }
-          )
-        }
-      }
-    )
-
-    vscode.commands.registerCommand(
-      'commitizen-code.changes.changeTitle',
-      async () => {
-        const title = await vscode.window.showInputBox({
-          prompt: 'Type the new title for the Test View',
-          placeHolder: view.title,
-        })
-        if (title) {
-          view.title = title
-        }
-      }
-    )
   }
 }
 
