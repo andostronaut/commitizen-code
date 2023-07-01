@@ -1,107 +1,72 @@
 import * as vscode from 'vscode'
+import * as path from 'path'
 
-class ChangesProvider {
-  public readonly type = 'commitizen-code.changes'
+import { isWorkspaceFoldersNotEmpty } from '../utils/workspace'
 
-  constructor(context: vscode.ExtensionContext) {
-    const view = vscode.window.createTreeView(this.type, {
-      treeDataProvider: aNodeWithIdTreeDataProvider(),
-      showCollapseAll: true,
-    })
+class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
+  public static readonly type = 'commitizen-code.changes'
+  public readonly root =
+    vscode.workspace.workspaceFolders &&
+    vscode.workspace.workspaceFolders.length > 0
+      ? vscode.workspace.workspaceFolders[0].uri.fsPath
+      : ''
 
-    context.subscriptions.push(view)
+  private _scm?: vscode.SourceControl
+  private _git?: any
+  private _workspace?: vscode.WorkspaceFolder[] | any
+
+  constructor() {
+    this._scm = vscode.scm.createSourceControl(
+      'git',
+      'Git',
+      vscode.Uri.parse(this.root)
+    )
+    this._git = vscode.extensions.getExtension('vscode.git')?.exports.getAPI(1)
+    this._workspace = vscode.workspace.workspaceFolders
   }
-}
 
-const tree: any = {
-  a: {
-    aa: {
-      aaa: {
-        aaaa: {
-          aaaaa: {
-            aaaaaa: {},
-          },
-        },
-      },
-    },
-    ab: {},
-  },
-  b: {
-    ba: {},
-    bb: {},
-  },
-}
-const nodes: any = {}
-
-function aNodeWithIdTreeDataProvider(): vscode.TreeDataProvider<{
-  key: string
-}> {
-  return {
-    getChildren: (element: { key: string }): { key: string }[] => {
-      return getChildren(element ? element.key : undefined).map(key =>
-        getNode(key)
-      )
-    },
-    getTreeItem: (element: { key: string }): vscode.TreeItem => {
-      const treeItem = getTreeItem(element.key)
-      treeItem.id = element.key
-      return treeItem
-    },
-    getParent: ({ key }: { key: string }): { key: string } | undefined => {
-      const parentKey = key.substring(0, key.length - 1)
-      return parentKey ? new Key(parentKey) : undefined
-    },
+  getTreeItem(element: vscode.TreeItem): vscode.TreeItem {
+    return element
   }
-}
 
-function getChildren(key: string | undefined): string[] {
-  if (!key) {
-    return Object.keys(tree)
-  }
-  const treeElement = getTreeElement(key)
-  if (treeElement) {
-    return Object.keys(treeElement)
-  }
-  return []
-}
-
-function getTreeItem(key: string): vscode.TreeItem {
-  const treeElement = getTreeElement(key)
-  // An example of how to use codicons in a MarkdownString in a tree item tooltip.
-  const tooltip = new vscode.MarkdownString(`$(zap) Tooltip for ${key}`, true)
-  return {
-    label: /**vscode.TreeItemLabel**/ <any>{
-      label: key,
-      highlights: key.length > 1 ? [[key.length - 2, key.length - 1]] : void 0,
-    },
-    tooltip,
-    collapsibleState:
-      treeElement && Object.keys(treeElement).length
-        ? vscode.TreeItemCollapsibleState.Collapsed
-        : vscode.TreeItemCollapsibleState.None,
-  }
-}
-
-function getTreeElement(element: string): any {
-  let parent = tree
-  for (let i = 0; i < element.length; i++) {
-    parent = parent[element.substring(0, i + 1)]
-    if (!parent) {
-      return null
+  getChildren(element?: vscode.TreeItem): Thenable<vscode.TreeItem[]> {
+    if (!isWorkspaceFoldersNotEmpty(this._workspace)) {
+      vscode.window.showInformationMessage('No folder in empty workspace')
+      return Promise.resolve([])
     }
-  }
-  return parent
-}
 
-function getNode(key: string): { key: string } {
-  if (!nodes[key]) {
-    nodes[key] = new Key(key)
-  }
-  return nodes[key]
-}
+    if (!this._git) {
+      vscode.window.showInformationMessage(
+        'Git is not initialized in this workspace'
+      )
+      return Promise.resolve([])
+    }
 
-class Key {
-  constructor(readonly key: string) {}
+    return Promise.all(
+      this._workspace.map(async (folder: vscode.WorkspaceFolder) => {
+        const repository = this._git.getRepository(folder.uri)
+        // if (repository) {
+        //   const status = await repository.getStatus()
+        //   const changedFiles = status.filter(
+        //     (file: any) => file.workingTreeStatus !== this._scm
+        //   )
+
+        //   return changedFiles.map((file: any) => {
+        //     const treeItem = new vscode.TreeItem(
+        //       file.path,
+        //       file.workingTreeStatus === this._scm
+        //         ? vscode.TreeItemCollapsibleState.None
+        //         : vscode.TreeItemCollapsibleState.Collapsed
+        //     )
+        //     treeItem.contextValue = 'changedFile'
+        //     return treeItem
+        //   })
+        // }
+
+        return []
+      })
+    ).then(items => items.flat())
+  }
 }
 
 export default ChangesProvider
