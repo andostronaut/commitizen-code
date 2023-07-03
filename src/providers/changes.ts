@@ -45,23 +45,29 @@ class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     return Promise.all(
       this._workspace.map(async (folder: vscode.WorkspaceFolder) => {
         const repository = this._git.getRepository(folder.uri)
-        // if (repository) {
-        //   const status = await repository.getStatus()
-        //   const changedFiles = status.filter(
-        //     (file: any) => file.workingTreeStatus !== this._scm
-        //   )
 
-        //   return changedFiles.map((file: any) => {
-        //     const treeItem = new vscode.TreeItem(
-        //       file.path,
-        //       file.workingTreeStatus === this._scm
-        //         ? vscode.TreeItemCollapsibleState.None
-        //         : vscode.TreeItemCollapsibleState.Collapsed
-        //     )
-        //     treeItem.contextValue = 'changedFile'
-        //     return treeItem
-        //   })
-        // }
+        if (repository) {
+          console.log(repository.repository.untrackedGroup.resourceStates)
+          console.log(repository.repository.workingTreeGroup.resourceStates)
+
+          console.log(repository.repository.sourceControl)
+
+          // const status = await repository.getStatus()ss
+          // const changedFiles = status.filter(
+          //   (file: any) => file.workingTreeStatus !== this._scm
+          // )
+
+          // return changedFiles.map((file: any) => {
+          //   const treeItem = new vscode.TreeItem(
+          //     file.path,
+          //     file.workingTreeStatus === this._scm
+          //       ? vscode.TreeItemCollapsibleState.None
+          //       : vscode.TreeItemCollapsibleState.Collapsed
+          //   )
+          //   treeItem.contextValue = 'changedFile'
+          //   return treeItem
+          // })
+        }
 
         return []
       })
