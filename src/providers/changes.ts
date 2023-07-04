@@ -30,7 +30,7 @@ class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     return element
   }
 
-  getChildren(element?: vscode.TreeItem): Thenable<vscode.TreeItem[]> {
+  getChildren(element?: vscode.TreeItem): Promise<Array<vscode.TreeItem>> {
     if (!isWorkspaceFoldersNotEmpty(this._workspace)) {
       vscode.window.showInformationMessage('No folder in empty workspace')
       return Promise.resolve([])
@@ -45,42 +45,45 @@ class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
 
     return Promise.all(
       this._workspace.map(async (folder: vscode.WorkspaceFolder) => {
-        if (this._git) {
-          const repository = this._git.getRepository(folder.uri)
+        const repository = this._git.getRepository(folder.uri)
+        const tree: Array<vscode.TreeItem> = []
 
-          if (repository) {
-            const untrackedGroup =
-              repository.repository?.untrackedGroup?.resourceStates
-            const workingTreeGroup =
-              repository.repository?.workingTreeGroup?.resourceStates
+        if (repository) {
+          const untrackedGroup =
+            repository.repository?.untrackedGroup?.resourceStates
+          const workingTreeGroup =
+            repository.repository?.workingTreeGroup?.resourceStates
 
-            if (hasUntrackedGroup(untrackedGroup)) {
-              console.log(untrackedGroup)
-            }
+          if (hasUntrackedGroup(untrackedGroup)) {
+            untrackedGroup.map((file: any) => {
+              const treeItem = new vscode.TreeItem(
+                file.resourceUri.path,
+                vscode.TreeItemCollapsibleState.Collapsed
+              )
 
-            if (hasWorkingTreeGroup(workingTreeGroup)) {
-              console.log(workingTreeGroup)
-            }
+              treeItem.contextValue = 'Untracked'
 
-            // const status = await repository.getStatus()
-            // const changedFiles = status.filter(
-            //   (file: any) => file.workingTreeStatus !== this._scm
-            // )
+              tree.push(treeItem)
+            })
+          }
 
-            // return changedFiles.map((file: any) => {
-            //   const treeItem = new vscode.TreeItem(
-            //     file.path,
-            //     file.workingTreeStatus === this._scm
-            //       ? vscode.TreeItemCollapsibleState.None
-            //       : vscode.TreeItemCollapsibleState.Collapsed
-            //   )
-            //   treeItem.contextValue = 'changedFile'
-            //   return treeItem
-            // })
+          if (hasWorkingTreeGroup(workingTreeGroup)) {
+            workingTreeGroup.map((file: any) => {
+              const fileName = `📝 ${file.resourceUri.path.split('/').pop()}`
+
+              const treeItem = new vscode.TreeItem(
+                fileName,
+                vscode.TreeItemCollapsibleState.None
+              )
+
+              treeItem.contextValue = 'Working Tree'
+
+              tree.push(treeItem)
+            })
           }
         }
 
-        return []
+        return Promise.resolve(tree)
       })
     ).then(items => items.flat())
   }
