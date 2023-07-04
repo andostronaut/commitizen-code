@@ -2,6 +2,7 @@ import * as vscode from 'vscode'
 import * as path from 'path'
 
 import { isWorkspaceFoldersNotEmpty } from '../utils/workspace'
+import { hasUntrackedGroup, hasWorkingTreeGroup } from '../utils/git'
 
 class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
   public static readonly type = 'commitizen-code.changes'
@@ -44,29 +45,39 @@ class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
 
     return Promise.all(
       this._workspace.map(async (folder: vscode.WorkspaceFolder) => {
-        const repository = this._git.getRepository(folder.uri)
+        if (this._git) {
+          const repository = this._git.getRepository(folder.uri)
 
-        if (repository) {
-          console.log(repository.repository.untrackedGroup.resourceStates)
-          console.log(repository.repository.workingTreeGroup.resourceStates)
+          if (repository) {
+            const untrackedGroup =
+              repository.repository?.untrackedGroup?.resourceStates
+            const workingTreeGroup =
+              repository.repository?.workingTreeGroup?.resourceStates
 
-          console.log(repository.repository.sourceControl)
+            if (hasUntrackedGroup(untrackedGroup)) {
+              console.log(untrackedGroup)
+            }
 
-          // const status = await repository.getStatus()ss
-          // const changedFiles = status.filter(
-          //   (file: any) => file.workingTreeStatus !== this._scm
-          // )
+            if (hasWorkingTreeGroup(workingTreeGroup)) {
+              console.log(workingTreeGroup)
+            }
 
-          // return changedFiles.map((file: any) => {
-          //   const treeItem = new vscode.TreeItem(
-          //     file.path,
-          //     file.workingTreeStatus === this._scm
-          //       ? vscode.TreeItemCollapsibleState.None
-          //       : vscode.TreeItemCollapsibleState.Collapsed
-          //   )
-          //   treeItem.contextValue = 'changedFile'
-          //   return treeItem
-          // })
+            // const status = await repository.getStatus()
+            // const changedFiles = status.filter(
+            //   (file: any) => file.workingTreeStatus !== this._scm
+            // )
+
+            // return changedFiles.map((file: any) => {
+            //   const treeItem = new vscode.TreeItem(
+            //     file.path,
+            //     file.workingTreeStatus === this._scm
+            //       ? vscode.TreeItemCollapsibleState.None
+            //       : vscode.TreeItemCollapsibleState.Collapsed
+            //   )
+            //   treeItem.contextValue = 'changedFile'
+            //   return treeItem
+            // })
+          }
         }
 
         return []
