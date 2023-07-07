@@ -1,5 +1,4 @@
 import * as vscode from 'vscode'
-import * as path from 'path'
 
 import { isWorkspaceFoldersNotEmpty } from '../utils/workspace'
 import { hasUntrackedGroup, hasWorkingTreeGroup } from '../utils/git'
