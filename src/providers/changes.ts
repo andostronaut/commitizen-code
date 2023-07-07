@@ -39,14 +39,14 @@ class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
         if (repository) {
           const untrackedGroup =
             repository.repository?.untrackedGroup?.resourceStates
-          const workingTreeGroup =
-            repository.repository?.workingTreeGroup?.resourceStates
 
           if (hasUntrackedGroup(untrackedGroup)) {
             untrackedGroup.map((file: any) => {
+              const fileName = `📝 ${file.resourceUri.path.split('/').pop()}`
+
               const treeItem = new vscode.TreeItem(
-                file.resourceUri.path,
-                vscode.TreeItemCollapsibleState.Collapsed
+                fileName,
+                vscode.TreeItemCollapsibleState.None
               )
 
               treeItem.contextValue = 'Untracked'
@@ -54,6 +54,9 @@ class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
               tree.push(treeItem)
             })
           }
+
+          const workingTreeGroup =
+            repository.repository?.workingTreeGroup?.resourceStates
 
           if (hasWorkingTreeGroup(workingTreeGroup)) {
             workingTreeGroup.map((file: any) => {
