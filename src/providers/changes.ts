@@ -11,16 +11,10 @@ class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
       ? vscode.workspace.workspaceFolders[0].uri.fsPath
       : ''
 
-  private _scm?: vscode.SourceControl
   private _git?: any
   private _workspace?: vscode.WorkspaceFolder[] | any
 
   constructor() {
-    this._scm = vscode.scm.createSourceControl(
-      'git',
-      'Git',
-      vscode.Uri.parse(this.root)
-    )
     this._git = vscode.extensions.getExtension('vscode.git')?.exports.getAPI(1)
     this._workspace = vscode.workspace.workspaceFolders
   }
