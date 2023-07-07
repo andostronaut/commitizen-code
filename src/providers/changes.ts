@@ -5,11 +5,6 @@ import { hasUntrackedGroup, hasWorkingTreeGroup } from '../utils/git'
 
 class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
   public static readonly type = 'commitizen-code.changes'
-  public readonly root =
-    vscode.workspace.workspaceFolders &&
-    vscode.workspace.workspaceFolders.length > 0
-      ? vscode.workspace.workspaceFolders[0].uri.fsPath
-      : ''
 
   private _git?: any
   private _workspace?: vscode.WorkspaceFolder[] | any
