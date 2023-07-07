@@ -21,6 +21,7 @@ class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
   async getChildren(): Promise<Array<vscode.TreeItem>> {
     if (!isWorkspaceFoldersNotEmpty(this._workspace)) {
       vscode.window.showInformationMessage('No folder in empty workspace')
+
       return Promise.resolve([])
     }
 
@@ -28,6 +29,7 @@ class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
       vscode.window.showInformationMessage(
         'Git is not initialized in this workspace'
       )
+
       return Promise.resolve([])
     }
 
