@@ -44,7 +44,7 @@ class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
 
           if (hasUntrackedGroup(untrackedGroup)) {
             untrackedGroup.map((file: any) => {
-              const fileName = `📝 ${file.resourceUri.path.split('/').pop()}`
+              const fileName = `${file.resourceUri.path.split('/').pop()}`
 
               const treeItem = new vscode.TreeItem(
                 fileName,
@@ -62,7 +62,7 @@ class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
 
           if (hasWorkingTreeGroup(workingTreeGroup)) {
             workingTreeGroup.map((file: any) => {
-              const fileName = `📝 ${file.resourceUri.path.split('/').pop()}`
+              const fileName = `${file.resourceUri.path.split('/').pop()}`
 
               const treeItem = new vscode.TreeItem(
                 fileName,
