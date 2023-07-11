@@ -1,4 +1,4 @@
-import { exec as execProcess, spawn as spawnProcess } from 'child_process'
+import * as process from 'child_process'
 
 type CmdProps = {
   exec: string
@@ -8,7 +8,7 @@ type CmdProps = {
 /**@param cmd @returns {Promise}*/
 function exec(cmd: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    execProcess(cmd, (err, out) => {
+    process.exec(cmd, (err, out) => {
       if (err) {
         return reject(err)
       }
@@ -20,7 +20,7 @@ function exec(cmd: string): Promise<string> {
 
 /**@param cmd*/
 function spawn(cmd: CmdProps): void {
-  const p = spawnProcess(cmd.exec, [cmd.cmd], { cwd: '.' })
+  const p = process.spawn(cmd.exec, [cmd.cmd], { cwd: '.' })
 
   p.stdout.on('data', data => {
     console.log('stdout: ' + data.toString())
@@ -37,12 +37,10 @@ function spawn(cmd: CmdProps): void {
 
 /**@param command @param args*/
 export function executeCommand(command: string, args: string): String {
-  const cp = require('child_process')
-
   let argument: string = args
   let cmd: string = command + ' ' + argument
 
-  const proc = cp.spawnSync(cmd, {
+  const proc = process.spawnSync(cmd, {
     shell: true,
     encoding: 'utf8',
   })
@@ -54,7 +52,7 @@ export function executeCommand(command: string, args: string): String {
       procData = proc.stdout.toString()
     }
     if (proc.stderr !== null && proc.stderr.toString() !== '') {
-      const procErr = proc.stderr.toString
+      const procErr = proc.stderr.toString()
       procData = procErr
     }
   }
