@@ -8,4 +8,5 @@ function generateNonce(): string {
   return text
 }
 
+
 export { generateNonce }
