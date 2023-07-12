@@ -1,10 +1,5 @@
 import * as process from 'child_process'
 
-type CmdProps = {
-  exec: string
-  cmd: string
-}
-
 /**@param cmd @returns {Promise}*/
 function exec(cmd: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
