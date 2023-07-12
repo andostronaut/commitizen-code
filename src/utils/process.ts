@@ -1,9 +1,9 @@
 import * as process from 'child_process'
 
-/**@param cmd @returns {Promise}*/
-function exec(cmd: string): Promise<string> {
+/**@param command @returns {Promise}*/
+function exec(command: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    process.exec(cmd, (err, out) => {
+    process.exec(command, (err, out) => {
       if (err) {
         return reject(err)
       }
@@ -13,9 +13,9 @@ function exec(cmd: string): Promise<string> {
   })
 }
 
-/**@param cmd*/
-function spawn(cmd: CmdProps): void {
-  const p = process.spawn(cmd.exec, [cmd.cmd], { cwd: '.' })
+/**@param command*/
+function spawn(command: CmdProps): void {
+  const p = process.spawn(command.exec, [command.cmd], { cwd: '.' })
 
   p.stdout.on('data', data => {
     console.log('stdout: ' + data.toString())
