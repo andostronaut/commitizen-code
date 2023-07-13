@@ -14,8 +14,8 @@ function exec(command: string): Promise<string> {
 }
 
 /**@param command*/
-function spawn(command: CmdProps): void {
-  const p = process.spawn(command.exec, [command.cmd], { cwd: '.' })
+function spawn(command: string, args: string): void {
+  const p = process.spawn(command, [args], { cwd: '.' })
 
   p.stdout.on('data', data => {
     console.log('stdout: ' + data.toString())
@@ -31,28 +31,26 @@ function spawn(command: CmdProps): void {
 }
 
 /**@param command @param args*/
-export function executeCommand(command: string, args: string): String {
-  let argument: string = args
-  let cmd: string = command + ' ' + argument
+export function execute(command: string, args: string): String {
+  const cmd: string = command + ' ' + args
 
   const proc = process.spawnSync(cmd, {
     shell: true,
     encoding: 'utf8',
   })
 
-  let procData = proc.stdout.toString()
+  let data = proc.stdout.toString()
 
   if (proc !== null) {
     if (proc.stdout !== null && proc.stdout.toString() !== '') {
-      procData = proc.stdout.toString()
+      data = proc.stdout.toString()
     }
     if (proc.stderr !== null && proc.stderr.toString() !== '') {
-      const procErr = proc.stderr.toString()
-      procData = procErr
+      data = proc.stderr.toString()
     }
   }
 
-  return procData
+  return data
 }
 
 export { exec, spawn }
