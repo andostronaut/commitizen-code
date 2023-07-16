@@ -13,6 +13,18 @@ function renderIntroUI(): string {
 }
 
 /**@returns {string}*/
+function renderOpenFolderUI(): string {
+  return `
+    <div id="open-folder">
+      <span>Open Folder</span>
+      <br>
+      <br>
+      <button id="open-folder-button">Open</button>
+    </div>
+  `
+}
+
+/**@returns {string}*/
 function renderCommitFormUI(): string {
   return `
     <form id="commit-form">
@@ -37,16 +49,4 @@ function renderCommitFormUI(): string {
   `
 }
 
-/**@returns {string}*/
-function renderOpenFolderUI(): string {
-  return `
-    <div id="open-folder">
-      <span>Open Folder</span>
-      <br>
-      <br>
-      <button id="open-folder-button">Open</button>
-    </div>
-  `
-}
-
-export { renderIntroUI, renderCommitFormUI, renderOpenFolderUI }
+export { renderIntroUI, renderOpenFolderUI, renderCommitFormUI }
