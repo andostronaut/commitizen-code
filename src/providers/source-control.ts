@@ -38,15 +38,20 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
     webviewView.webview.onDidReceiveMessage(message => {
       switch (message.type) {
-        case 'error': {
-          vscode.window.showErrorMessage(message.data.message)
-
-          break
+        case 'open': {
+          vscode.window.showInformationMessage('Opening folder')
         }
+
         case 'commit': {
           vscode.window.showInformationMessage(
             `Commitizen Code: Commit message is: ${message.data.commit} `
           )
+
+          break
+        }
+
+        case 'error': {
+          vscode.window.showErrorMessage(message.data.message)
 
           break
         }

@@ -6,6 +6,7 @@
 ;(function () {
   // @ts-ignore
   const vscode = acquireVsCodeApi()
+  const openFolderButton = document.querySelector('#open-folder-button')
   const commitSelect = document.querySelector('#commit-select')
   const commitInput = document.querySelector('#commit-input')
   const commitButton = document.querySelector('#commit-button')
@@ -14,6 +15,10 @@
   //   /^(feature|bugfix|hotfix|chore|epic|design|experiment|documentation):(?!\s*$)\s/
 
   let commitType = 'feature'
+
+  openFolderButton?.addEventListener('click', e => {
+    vscode.postMessage({ type: 'open' })
+  })
 
   commitSelect?.addEventListener('change', e => {
     // @ts-ignore
