@@ -1,7 +1,14 @@
-import { randomBytes } from 'crypto'
+function generateNonce(length: number = 16): string {
+  const chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890'
 
-function generateNonce(): string {
-  return randomBytes(16).toString('base64')
+  const randomArray = Array.from(
+    { length },
+    (v, k) => chars[Math.floor(Math.random() * chars.length)]
+  )
+
+  const randomString = randomArray.join('')
+
+  return randomString
 }
 
 export { generateNonce }
