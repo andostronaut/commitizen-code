@@ -4,6 +4,14 @@ import { generateNonce } from '../../utils/nonce'
 import { getStylesheetURI } from '../../utils/stylesheet'
 import { getScriptURI } from '../../utils/script'
 
+/**
+ * @param {Object} params
+ * @param {string} params.title
+ * @param {vscode.Webview} params.webview
+ * @param {vscode.Uri} params.extensionUri
+ * @param {string} params.children
+ * @returns {string}
+ */
 function mainLayout({
   title,
   webview,
