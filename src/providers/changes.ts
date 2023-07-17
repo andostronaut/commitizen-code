@@ -14,10 +14,17 @@ class ChangesProvider implements vscode.TreeDataProvider<vscode.TreeItem> {
     this._workspace = vscode.workspace.workspaceFolders
   }
 
+  /**
+   * @param {vscode.TreeItem} element
+   * @returns {vscode.TreeItem}
+   */
   getTreeItem(element: vscode.TreeItem): vscode.TreeItem {
     return element
   }
 
+  /**
+   * @returns {Promise<Array<vscode.TreeItem>>}
+   */
   async getChildren(): Promise<Array<vscode.TreeItem>> {
     if (!isWorkspaceFoldersNotEmpty(this._workspace)) {
       vscode.window.showInformationMessage('No folder in empty workspace')
