@@ -13,13 +13,19 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
   private _workspace?: vscode.WorkspaceFolder[] | any
   private _extensionUri?: vscode.Uri | any
 
-  /**@param _extensionUri*/
+  /**
+   * @param {vscode.ExtensionContext} context
+   */
   constructor(context: vscode.ExtensionContext) {
     this._workspace = vscode.workspace.workspaceFolders
     this._extensionUri = context.extensionUri
   }
 
-  /**@param webviewView @param _context @param _token*/
+  /**
+   * @param {vscode.Webview} webviewView
+   * @param {vscode.WebviewViewResolveContext} _context
+   * @param {vscode.CancellationToken} _token
+   */
   public async resolveWebviewView(
     webviewView: vscode.WebviewView,
     _context: vscode.WebviewViewResolveContext,
@@ -59,7 +65,10 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
     })
   }
 
-  /**@param webview @returns*/
+  /**
+   * @param {vscode.Webview} webview
+   * @returns {Promise<string>}
+   */
   private async _getHtmlForWebview(webview: vscode.Webview): Promise<string> {
     const { styleResetUri, styleVSCodeUri, styleMainUri } = getStylesheetURI(
       webview,
