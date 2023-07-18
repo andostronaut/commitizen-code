@@ -14,6 +14,7 @@ Go check the CLI version if you like to use command for commiting:
 ## Information
 
 > This plugin is still under construction and development 🛠️
+>
 > If you like the concept, please start with our [Commitizen CLI](https://github.com/iamando/commitizen-cli) 🚀
 
 ## Support
