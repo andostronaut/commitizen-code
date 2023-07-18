@@ -3,7 +3,9 @@ import * as vscode from 'vscode'
 import SourceControlProvider from './providers/source-control'
 import ChangesProvider from './providers/changes'
 
-/**@param context*/
+/**
+ * @param {vscode.ExtensionContext} context
+ */
 function activate(context: vscode.ExtensionContext) {
   const sourceControlProvider = new SourceControlProvider(context)
 
