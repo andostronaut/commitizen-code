@@ -1,6 +1,9 @@
 import * as process from 'child_process'
 
-/**@param command @returns {Promise}*/
+/**
+ * @param {string} command
+ * @returns {Promise<string>}
+ */
 function exec(command: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
     process.exec(command, (err, out) => {
@@ -13,7 +16,10 @@ function exec(command: string): Promise<string> {
   })
 }
 
-/**@param command*/
+/**
+ * @param {string} command
+ * @param {string} args
+ */
 function spawn(command: string, args: string): void {
   const p = process.spawn(command, [args], { cwd: '.' })
 
@@ -30,8 +36,12 @@ function spawn(command: string, args: string): void {
   })
 }
 
-/**@param command @param args*/
-export function execute(command: string, args: string): String {
+/**
+ * @param {string} command
+ * @param {string} args
+ * @returns {string}
+ */
+function execute(command: string, args: string): string {
   const cmd: string = command + ' ' + args
 
   const proc = process.spawnSync(cmd, {
@@ -53,4 +63,4 @@ export function execute(command: string, args: string): String {
   return data
 }
 
-export { exec, spawn }
+export { exec, spawn, execute }
