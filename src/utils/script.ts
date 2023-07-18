@@ -1,6 +1,10 @@
 import * as vscode from 'vscode'
 
-/**@param webview @param extensionUri @returns*/
+/**
+ * @param {vscode.Webview} webview
+ * @param {vscode.Uri} extensionUri
+ * @returns {object}
+ */
 function getScriptURI(
   webview: vscode.Webview,
   extensionUri: vscode.Uri
