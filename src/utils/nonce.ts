@@ -1,3 +1,7 @@
+/**
+ * @param {number} length
+ * @returns {string}
+ */
 function generateNonce(length: number = 16): string {
   const chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890'
 
