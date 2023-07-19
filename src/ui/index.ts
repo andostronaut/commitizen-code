@@ -1,4 +1,6 @@
-/**@returns {string}*/
+/**
+ * @returns {string}
+ */
 function renderIntroUI(): string {
   return `
     <div>
@@ -12,7 +14,9 @@ function renderIntroUI(): string {
   `
 }
 
-/**@returns {string}*/
+/**
+ * @returns {string}
+ */
 function renderOpenFolderUI(): string {
   return `
     <div id="open-folder">
@@ -24,7 +28,9 @@ function renderOpenFolderUI(): string {
   `
 }
 
-/**@returns {string}*/
+/**
+ * @returns {string}
+ */
 function renderCommitFormUI(): string {
   return `
     <form id="commit-form">
