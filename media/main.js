@@ -29,6 +29,7 @@
           message: 'Commitizen Code: Commit message is empty',
         },
       })
+
       return
     }
 
