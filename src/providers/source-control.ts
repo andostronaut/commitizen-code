@@ -80,7 +80,7 @@ class SourceControlProvider implements vscode.WebviewViewProvider {
 
     const outroText = (await isWorkspaceHasGit(this._workspace as any))
       ? 'Start your commit journey from now.'
-      : 'Please open a folder how have git initialized.'
+      : 'Please open a folder who have git initialized.'
 
     const partialUI = (await isWorkspaceHasGit(this._workspace as any))
       ? renderCommitFormUI
