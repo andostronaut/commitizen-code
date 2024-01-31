@@ -42,7 +42,7 @@ function spawn(command: string, args: string): void {
  * @returns {string}
  */
 function execute(command: string, args: string): string {
-  const cmd: string = command + ' ' + args
+  const cmd: string = `${command} ${args}`
 
   const proc = process.spawnSync(cmd, {
     shell: true,
